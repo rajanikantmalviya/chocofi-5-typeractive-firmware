@@ -10,13 +10,13 @@ nice!view displays. ZMK Studio is enabled over USB on the left half.
 The export's behavior IDs are device-local, so they are translated to named ZMK
 behaviors rather than copied as IDs. Only the first 36 bindings of each layer
 belong to the selected 5-column layout; the six trailing empty entries are
-ignored. The three reserved Studio layers remain available.
+ignored. Unassigned behavior-ID-0 entries within an active layer are disabled
+with `&none`.
 
-The seed's layers are **Base**, **Nav** (layer 1), and **Number** (layer 2).
-All exported bindings are preserved except Nav's S and F positions, which now
-move the mouse cursor left and right instead of selecting Bluetooth profiles 2
-and 4. The Number layer's disabled keys and explicit auto-shift parameters are
-preserved, including Minus on tap / Tilde on hold.
+The seed's four layers are **Base**, **Nav** (layer 1), **Number** (layer 2), and
+**Func** (layer 3). All 36 exported bindings per layer are preserved. Number now
+uses plain key presses, not auto-shift. **Number + Shift** (layer 4) mirrors its
+enabled keys with Shift applied, and layer 5 remains reserved for Studio.
 
 ## Base layout
 
@@ -30,8 +30,8 @@ Z X C V B     N M , . /
 ```
 
 Space and Enter activate **Nav** when held. Tab and Delete activate **Number**
-when held. All four send their normal keys when tapped, as specified by the JSON
-seed.
+when held. Esc activates **Func** when held. All five send their normal keys
+when tapped, as specified by the JSON seed.
 
 The base home-row modifier holds are:
 
@@ -88,8 +88,8 @@ selected by choosing the named behavior; speed and acceleration still require
 firmware changes.
 
 For clicks, choose the standard **Mouse Key Press** behavior in Studio and
-select MB1 (left), MB2 (right), MB3 (middle), MB4, or MB5. No click binding is
-added to the default layout.
+select MB1 (left), MB2 (right), MB3 (middle), MB4, or MB5. The updated seed already
+includes left/right clicks, movement, scrolling, and navigation keys on Nav.
 
 After flashing, use **Restore Stock Settings** in Studio to load the new seed
 if a saved keymap exists; record customizations first because this replaces
@@ -97,3 +97,53 @@ them. Mouse support changes the HID descriptor. For an existing Bluetooth
 connection, forget the keyboard on the host, clear the corresponding keyboard
 bond using `&bt BT_CLR`, and pair again so the host refreshes the descriptor.
 See [ZMK's mouse emulation documentation](https://zmk.dev/docs/keymaps/behaviors/mouse-emulation).
+
+## Combos and tap dances
+
+These combos are recognized on Base. Press all chord keys within 50 ms.
+Three- and four-key chords take precedence over their shorter subsets when
+all keys arrive within that window; for example, J+K+L sends Enter, not Space.
+
+| Chord | Action |
+| --- | --- |
+| I+O | Backspace |
+| L+; | Delete |
+| J+K+L | Enter |
+| J+K | Space |
+| D+F | Space |
+| S+D+F | Enter |
+| Q+W | Esc |
+| W+E | Tab |
+
+| Chord | Single tap | Double tap |
+| --- | --- | --- |
+| U+I+O | One-shot Number | Switch to Number until exited |
+| U+I+O+P | One-shot Number + Shift | Switch to Number + Shift until exited |
+| W+E+R | One-shot Func | Not defined |
+| A+S | One-shot Left Shift | Toggle Left Shift Lock |
+
+Release all chord keys between taps. The two-action dances use a 200 ms
+double-tap window. A single-tap action resolves when that window expires or
+another key interrupts it. The one-action Func behavior resolves immediately.
+The standard one-shot layer/key behaviors expire after 1 second if unused.
+
+While Number or Number + Shift is active, a single tap of either Number chord
+returns to Base. This provides the exit after a persistent double-tap activation;
+it also cancels a pending one-shot Number layer. These modes do not automatically
+exit on a non-number key.
+
+A+S works on all five active layers. Double-tap it again to disable Shift Lock.
+Number + Shift uses shifted keycodes rather than holding global Shift, so
+exiting it cannot leave a modifier stuck or clear an independent Shift Lock.
+It is a separate Studio layer: later Studio edits to Number do not automatically
+update its shifted copy.
+
+Studio can assign the named tap-dance behaviors to individual keys, but cannot
+edit their actions/timing or configure the physical combos. Those definitions
+require a firmware rebuild.
+
+## Checking the configuration
+
+Run `python -m unittest discover -s tests` to check seed fidelity, the shifted
+Number layer, combo positions/scopes, and tap-dance actions. GitHub Actions builds
+the firmware for both halves.
