@@ -1,0 +1,689 @@
+{
+  "format": "zmk-studio-keymap",
+  "version": 1,
+  "deviceName": "Corne",
+  "physicalLayout": {
+    "name": "5 Column",
+    "keyCount": 36
+  },
+  "behaviors": [
+    {
+      "id": 4,
+      "displayName": "Key Press"
+    },
+    {
+      "id": 22,
+      "displayName": "Home Row Mods"
+    },
+    {
+      "id": 9,
+      "displayName": "Layer-Tap"
+    },
+    {
+      "id": 20,
+      "displayName": "Bluetooth"
+    },
+    {
+      "id": 21,
+      "displayName": "Transparent"
+    },
+    {
+      "id": 19,
+      "displayName": "auto_shift"
+    },
+    {
+      "id": 11,
+      "displayName": "None"
+    }
+  ],
+  "layers": [
+    {
+      "id": 0,
+      "name": "Base",
+      "bindings": [
+        {
+          "behaviorId": 4,
+          "param1": 458772,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458778,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458760,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458773,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458775,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458780,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458776,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458764,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458770,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458771,
+          "param2": 0
+        },
+        {
+          "behaviorId": 22,
+          "param1": 458977,
+          "param2": 458756
+        },
+        {
+          "behaviorId": 22,
+          "param1": 458976,
+          "param2": 458774
+        },
+        {
+          "behaviorId": 22,
+          "param1": 458979,
+          "param2": 458759
+        },
+        {
+          "behaviorId": 22,
+          "param1": 458978,
+          "param2": 458761
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458762,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458763,
+          "param2": 0
+        },
+        {
+          "behaviorId": 22,
+          "param1": 458982,
+          "param2": 458765
+        },
+        {
+          "behaviorId": 22,
+          "param1": 458983,
+          "param2": 458766
+        },
+        {
+          "behaviorId": 22,
+          "param1": 458980,
+          "param2": 458767
+        },
+        {
+          "behaviorId": 22,
+          "param1": 458981,
+          "param2": 458803
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458781,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458779,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458758,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458777,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458757,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458769,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458768,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458806,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458807,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458808,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458793,
+          "param2": 0
+        },
+        {
+          "behaviorId": 9,
+          "param1": 2,
+          "param2": 458795
+        },
+        {
+          "behaviorId": 9,
+          "param1": 1,
+          "param2": 458796
+        },
+        {
+          "behaviorId": 9,
+          "param1": 1,
+          "param2": 458792
+        },
+        {
+          "behaviorId": 9,
+          "param1": 2,
+          "param2": 458828
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458794,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Nav",
+      "bindings": [
+        {
+          "behaviorId": 4,
+          "param1": 34013214,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 34013215,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 34013216,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 34013217,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 34013218,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 34013219,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 34013220,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458837,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 34013222,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 34013223,
+          "param2": 0
+        },
+        {
+          "behaviorId": 20,
+          "param1": 3,
+          "param2": 0
+        },
+        {
+          "behaviorId": 20,
+          "param1": 3,
+          "param2": 1
+        },
+        {
+          "behaviorId": 20,
+          "param1": 3,
+          "param2": 2
+        },
+        {
+          "behaviorId": 20,
+          "param1": 3,
+          "param2": 3
+        },
+        {
+          "behaviorId": 20,
+          "param1": 3,
+          "param2": 4
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458832,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458833,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458834,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458831,
+          "param2": 0
+        },
+        {
+          "behaviorId": 21,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 20,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 21,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 21,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 21,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 21,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 21,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 21,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 21,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 21,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 21,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458979,
+          "param2": 0
+        },
+        {
+          "behaviorId": 21,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458796,
+          "param2": 0
+        },
+        {
+          "behaviorId": 19,
+          "param1": 34013224,
+          "param2": 458792
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458793,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458795,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Number",
+      "bindings": [
+        {
+          "behaviorId": 19,
+          "param1": 34013214,
+          "param2": 458782
+        },
+        {
+          "behaviorId": 19,
+          "param1": 34013215,
+          "param2": 458783
+        },
+        {
+          "behaviorId": 19,
+          "param1": 34013216,
+          "param2": 458784
+        },
+        {
+          "behaviorId": 19,
+          "param1": 34013217,
+          "param2": 458785
+        },
+        {
+          "behaviorId": 19,
+          "param1": 34013218,
+          "param2": 458786
+        },
+        {
+          "behaviorId": 19,
+          "param1": 34013219,
+          "param2": 458787
+        },
+        {
+          "behaviorId": 19,
+          "param1": 34013220,
+          "param2": 458788
+        },
+        {
+          "behaviorId": 19,
+          "param1": 34013221,
+          "param2": 458789
+        },
+        {
+          "behaviorId": 19,
+          "param1": 34013222,
+          "param2": 458790
+        },
+        {
+          "behaviorId": 19,
+          "param1": 34013223,
+          "param2": 458791
+        },
+        {
+          "behaviorId": 19,
+          "param1": 34013237,
+          "param2": 458797
+        },
+        {
+          "behaviorId": 19,
+          "param1": 34013230,
+          "param2": 458798
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 19,
+          "param1": 458799,
+          "param2": 458799
+        },
+        {
+          "behaviorId": 19,
+          "param1": 458800,
+          "param2": 458800
+        },
+        {
+          "behaviorId": 19,
+          "param1": 34013233,
+          "param2": 458801
+        },
+        {
+          "behaviorId": 19,
+          "param1": 458804,
+          "param2": 458804
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        }
+      ]
+    }
+  ]
+}
