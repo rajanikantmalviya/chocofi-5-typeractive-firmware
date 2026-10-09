@@ -101,7 +101,7 @@ See [ZMK's mouse emulation documentation](https://zmk.dev/docs/keymaps/behaviors
 ## Combos and tap dances
 
 These combos are recognized on Base. Press all chord keys within 50 ms.
-Three- and four-key chords take precedence over their shorter subsets when
+Three-key chords take precedence over their shorter subsets when
 all keys arrive within that window; for example, J+K+L sends Enter, not Space.
 
 | Chord | Action |
@@ -114,33 +114,31 @@ all keys arrive within that window; for example, J+K+L sends Enter, not Space.
 | S+D+F | Enter |
 | Q+W | Esc |
 | W+E | Tab |
+| U+I+O | Toggle Number on/off |
+| A+S | Toggle Left Shift Lock on/off |
 
-| Chord | Single tap | Double tap |
-| --- | --- | --- |
-| U+I+O | One-shot Number | Switch to Number until exited |
-| U+I+O+P | One-shot Number + Shift | Switch to Number + Shift until exited |
-| W+E+R | One-shot Func | Not defined |
-| A+S | One-shot Left Shift | Toggle Left Shift Lock |
+U+I+O uses `&tog NUMBER` on both Base and Number, so the same chord turns the
+layer on and off. A+S uses `&kt LSHIFT` on all five active layers; Shift stays
+held until the chord is pressed again or Shift is otherwise released.
+Neither toggle has a tap-dance delay or a double-tap action. Release all chord
+keys before repeating a chord.
 
-Release all chord keys between taps. The two-action dances use a 200 ms
-double-tap window. A single-tap action resolves when that window expires or
-another key interrupts it. The one-action Func behavior resolves immediately.
-The standard one-shot layer/key behaviors expire after 1 second if unused.
+U+I+O+P has no dedicated combo or tap-dance action. Its U+I+O subset can still
+trigger the Number toggle, so it should not be used as a separate gesture.
 
-While Number or Number + Shift is active, a single tap of either Number chord
-returns to Base. This provides the exit after a persistent double-tap activation;
-it also cancels a pending one-shot Number layer. These modes do not automatically
-exit on a non-number key.
+W+E+R retains the existing one-shot Func action on Base. This is the only
+remaining tap-dance behavior, has one action, and resolves immediately.
+The standard one-shot layer expires after 1 second if unused.
 
-A+S works on all five active layers. Double-tap it again to disable Shift Lock.
-Number + Shift uses shifted keycodes rather than holding global Shift, so
-exiting it cannot leave a modifier stuck or clear an independent Shift Lock.
-It is a separate Studio layer: later Studio edits to Number do not automatically
-update its shifted copy.
+The Number + Shift layer remains available in Studio, but no longer has a
+dedicated chord. For shifted numbers using the new toggles, enable Number with
+U+I+O and Shift Lock with A+S; disable them independently with the same chords.
+Later Studio edits to Number do not automatically update its shifted copy.
 
-Studio can assign the named tap-dance behaviors to individual keys, but cannot
-edit their actions/timing or configure the physical combos. Those definitions
-require a firmware rebuild.
+Studio can assign the standard Layer Toggle and Key Toggle behaviors, and the
+remaining Function One Shot behavior, to individual keys. It cannot configure
+the physical combos. The old Number/Shift tap-dance behaviors have been removed;
+reassign any saved Studio bindings that used them, or restore stock settings.
 
 ## Checking the configuration
 

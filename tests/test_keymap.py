@@ -205,16 +205,9 @@ class KeymapTests(unittest.TestCase):
             "combo_enter_left": ([11, 12, 13], ["BASE"], [("kp", ["RET"])]),
             "combo_escape": ([0, 1], ["BASE"], [("kp", ["ESC"])]),
             "combo_tab": ([1, 2], ["BASE"], [("kp", ["TAB"])]),
-            "combo_number": ([6, 7, 8], ["BASE"], [("td_number", [])]),
-            "combo_number_shift": ([6, 7, 8, 9], ["BASE"], [("td_number_shift", [])]),
+            "combo_number": ([6, 7, 8], ["BASE", "NUMBER"], [("tog", ["NUMBER"])]),
             "combo_function": ([1, 2, 3], ["BASE"], [("td_func", [])]),
-            "combo_shift": ([10, 11], list(LAYERS), [("td_shift", [])]),
-            "combo_number_exit": (
-                [6, 7, 8], ["NUMBER", "NUMBER_SHIFT"], [("to", ["BASE"])]
-            ),
-            "combo_number_shift_exit": (
-                [6, 7, 8, 9], ["NUMBER", "NUMBER_SHIFT"], [("to", ["BASE"])]
-            ),
+            "combo_shift": ([10, 11], list(LAYERS), [("kt", ["LSHIFT"])]),
         }
         self.assertEqual(
             set(re.findall(r"\b(combo_\w+)\s*\{", KEYMAP)), set(expected)
@@ -234,13 +227,11 @@ class KeymapTests(unittest.TestCase):
 
     def test_tap_dances(self):
         expected = {
-            "number_tap_dance": [("sl", ["NUMBER"]), ("to", ["NUMBER"])],
-            "shifted_number_tap_dance": [
-                ("sl", ["NUMBER_SHIFT"]), ("to", ["NUMBER_SHIFT"])
-            ],
             "function_tap_dance": [("sl", ["FUNC"])],
-            "shift_tap_dance": [("sk", ["LSHIFT"]), ("kt", ["LSHIFT"])],
         }
+        self.assertEqual(KEYMAP.count('compatible = "zmk,behavior-tap-dance";'), 1)
+        for removed in ("td_number", "td_number_shift", "td_shift"):
+            self.assertNotRegex(KEYMAP, rf"\b{removed}\b")
         for name, actions in expected.items():
             with self.subTest(dance=name):
                 body = node_body(name)
@@ -248,6 +239,26 @@ class KeymapTests(unittest.TestCase):
                 self.assertIn("#binding-cells = <0>;", body)
                 self.assertIn("tapping-term-ms = <200>;", body)
                 self.assertEqual(bindings(body), actions)
+
+    def test_overlapping_combos(self):
+        for shorter, longer in (
+            ("combo_backspace", "combo_number"),
+            ("combo_space_right", "combo_enter_right"),
+            ("combo_space_left", "combo_enter_left"),
+            ("combo_tab", "combo_function"),
+        ):
+            with self.subTest(shorter=shorter, longer=longer):
+                bodies = [node_body(shorter), node_body(longer)]
+                positions = [
+                    set(re.search(r"key-positions = <([^>]+)>", body)[1].split())
+                    for body in bodies
+                ]
+                self.assertLess(positions[0], positions[1])
+                for body in bodies:
+                    self.assertIn("timeout-ms = <50>;", body)
+                    self.assertIn(
+                        "BASE", re.search(r"layers = <([^>]+)>", body)[1].split()
+                    )
 
 
 if __name__ == "__main__":

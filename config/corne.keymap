@@ -44,36 +44,12 @@
             bindings = <&kp>, <&kp>;
         };
 
-        td_number: number_tap_dance {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            display-name = "Number Tap Dance";
-            tapping-term-ms = <200>;
-            bindings = <&sl NUMBER>, <&to NUMBER>;
-        };
-
-        td_number_shift: shifted_number_tap_dance {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            display-name = "Shifted Number Tap Dance";
-            tapping-term-ms = <200>;
-            bindings = <&sl NUMBER_SHIFT>, <&to NUMBER_SHIFT>;
-        };
-
         td_func: function_tap_dance {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             display-name = "Function One Shot";
             tapping-term-ms = <200>;
             bindings = <&sl FUNC>;
-        };
-
-        td_shift: shift_tap_dance {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            display-name = "Shift Tap Dance";
-            tapping-term-ms = <200>;
-            bindings = <&sk LSHIFT>, <&kt LSHIFT>;
         };
 
         // Fixed-parameter macros expose movement and scrolling in Studio on ZMK v0.3.
@@ -181,15 +157,8 @@
         combo_number {
             timeout-ms = <50>;
             key-positions = <6 7 8>;
-            layers = <BASE>;
-            bindings = <&td_number>;
-        };
-
-        combo_number_shift {
-            timeout-ms = <50>;
-            key-positions = <6 7 8 9>;
-            layers = <BASE>;
-            bindings = <&td_number_shift>;
+            layers = <BASE NUMBER>;
+            bindings = <&tog NUMBER>;
         };
 
         combo_function {
@@ -203,21 +172,7 @@
             timeout-ms = <50>;
             key-positions = <10 11>;
             layers = <BASE NAV NUMBER FUNC NUMBER_SHIFT>;
-            bindings = <&td_shift>;
-        };
-
-        combo_number_exit {
-            timeout-ms = <50>;
-            key-positions = <6 7 8>;
-            layers = <NUMBER NUMBER_SHIFT>;
-            bindings = <&to BASE>;
-        };
-
-        combo_number_shift_exit {
-            timeout-ms = <50>;
-            key-positions = <6 7 8 9>;
-            layers = <NUMBER NUMBER_SHIFT>;
-            bindings = <&to BASE>;
+            bindings = <&kt LSHIFT>;
         };
     };
 
