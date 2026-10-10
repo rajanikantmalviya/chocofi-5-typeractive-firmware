@@ -136,6 +136,7 @@ all keys arrive within that window; for example, J+K+L sends Enter, not Space.
 | S+D+F | Enter |
 | Q+W | Esc |
 | W+E | Tab |
+| E+R | Toggle Number on/off |
 | A+S | Toggle Left Shift Lock on/off |
 
 L+; no longer has a combo. The wider 80 ms chord window makes staggered presses
@@ -148,8 +149,13 @@ Their positions, Base scope, and 80 ms window are unchanged. Live read-only
 Studio diagnostics confirmed the 5-column layout and U/I/O bindings at
 positions 6/7/8; this trial does not establish the cause of the physical failure.
 Test U+I and I+O separately after flashing, in both press orders, along with
-ordinary U/I/O typing. Number remains accessible by holding Tab or Delete,
+ordinary U/I/O typing. Number is accessible with E+R, by holding Tab or Delete,
 or by assigning **Layer Toggle** for layer 2 to a key in Studio.
+
+E+R uses `&tog NUMBER` on Base and Number, so the same physical chord turns
+Number on and off (the positions contain 3+4 on Number). On Base, W+E+R's
+one-shot Func action takes precedence if all three keys arrive within 80 ms.
+Release all chord keys before toggling again.
 
 A+S uses `&kt LSHIFT` on all five active layers; Shift stays
 held until the chord is pressed again or Shift is otherwise released.
@@ -164,7 +170,8 @@ remaining tap-dance behavior, has one action, and resolves immediately.
 The standard one-shot layer expires after 1 second if unused.
 
 The Number + Shift layer remains available in Studio, but no longer has a
-dedicated chord. For shifted numbers, hold Tab or Delete for Number and toggle
+dedicated chord. For shifted numbers, toggle Number with E+R or hold Tab or
+Delete for Number and toggle
 Shift Lock with A+S, or use a Studio-assigned Number toggle.
 Later Studio edits to Number do not automatically update its shifted copy.
 

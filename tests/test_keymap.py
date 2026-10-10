@@ -207,6 +207,7 @@ class KeymapTests(unittest.TestCase):
             "combo_enter_left": ([11, 12, 13], ["BASE"], [("kp", ["RET"])]),
             "combo_escape": ([0, 1], ["BASE"], [("kp", ["ESC"])]),
             "combo_tab": ([1, 2], ["BASE"], [("kp", ["TAB"])]),
+            "combo_number_er": ([2, 3], ["BASE", "NUMBER"], [("tog", ["NUMBER"])]),
             "combo_function": ([1, 2, 3], ["BASE"], [("td_func", [])]),
             "combo_shift": ([10, 11], list(LAYERS), [("kt", ["LSHIFT"])]),
         }
@@ -247,6 +248,7 @@ class KeymapTests(unittest.TestCase):
             ("combo_space_right", "combo_enter_right"),
             ("combo_space_left", "combo_enter_left"),
             ("combo_tab", "combo_function"),
+            ("combo_number_er", "combo_function"),
         ):
             with self.subTest(shorter=shorter, longer=longer):
                 bodies = [node_body(shorter), node_body(longer)]

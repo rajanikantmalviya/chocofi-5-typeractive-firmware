@@ -180,6 +180,13 @@
             bindings = <&kp TAB>;
         };
 
+        combo_number_er {
+            timeout-ms = <80>;
+            key-positions = <2 3>;
+            layers = <BASE NUMBER>;
+            bindings = <&tog NUMBER>;
+        };
+
         combo_function {
             timeout-ms = <80>;
             key-positions = <1 2 3>;
