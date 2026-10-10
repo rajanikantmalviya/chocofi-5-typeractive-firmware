@@ -67,12 +67,16 @@ handling rather than the typing-friendly settings below.
 Assigning Home Row Mods to an auto-shift key replaces auto-shift on that key:
 holding it sends the chosen modifier rather than a shifted letter.
 
-The behavior uses balanced hold-tap handling with a 250 ms tapping term, a
-175 ms quick-tap window for tap-then-hold repetition, and a 125 ms prior-idle
+The behavior uses balanced hold-tap handling with a 300 ms tapping term, a
+175 ms quick-tap window for tap-then-hold repetition, and a 175 ms prior-idle
 requirement to reduce accidental modifiers during fast typing. Balanced handling
 also resolves a hold when another key is pressed and released while it is held.
 Studio can change the hold modifier and tap key, but not these timing or flavor
 settings. To tune those, edit `hrm` in `config/corne.keymap`, rebuild, and reflash.
+The longer hold threshold and prior-idle requirement reduce accidental modifier
+holds, but also require more deliberate holds and a longer pause after typing.
+Balanced handling can still resolve a modifier before 300 ms when another key
+is pressed and released.
 
 ## Mouse actions in ZMK Studio
 
@@ -100,14 +104,14 @@ See [ZMK's mouse emulation documentation](https://zmk.dev/docs/keymaps/behaviors
 
 ## Combos and tap dances
 
-These combos are recognized on Base. Press all chord keys within 50 ms.
+These combos are recognized on Base. Press all chord keys within 80 ms.
 Three-key chords take precedence over their shorter subsets when
 all keys arrive within that window; for example, J+K+L sends Enter, not Space.
 
 | Chord | Action |
 | --- | --- |
-| I+O | Backspace |
-| L+; | Delete |
+| U+I | Backspace |
+| I+O | Delete |
 | J+K+L | Enter |
 | J+K | Space |
 | D+F | Space |
@@ -116,6 +120,11 @@ all keys arrive within that window; for example, J+K+L sends Enter, not Space.
 | W+E | Tab |
 | U+I+O | Toggle Number on/off |
 | A+S | Toggle Left Shift Lock on/off |
+
+L+; no longer has a combo. The wider 80 ms chord window makes staggered presses
+easier to recognize, but may add delay to shorter overlapping chords and make
+ordinary typing rolls more likely to trigger a combo. U+I+O takes precedence
+over U+I and I+O when all three keys arrive within that window.
 
 U+I+O uses `&tog NUMBER` on both Base and Number, so the same chord turns the
 layer on and off. A+S uses `&kt LSHIFT` on all five active layers; Shift stays

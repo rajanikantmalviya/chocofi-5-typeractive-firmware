@@ -197,8 +197,8 @@ class KeymapTests(unittest.TestCase):
 
     def test_combos(self):
         expected = {
-            "combo_backspace": ([7, 8], ["BASE"], [("kp", ["BSPC"])]),
-            "combo_delete": ([18, 19], ["BASE"], [("kp", ["DEL"])]),
+            "combo_backspace": ([6, 7], ["BASE"], [("kp", ["BSPC"])]),
+            "combo_delete": ([7, 8], ["BASE"], [("kp", ["DEL"])]),
             "combo_enter_right": ([16, 17, 18], ["BASE"], [("kp", ["RET"])]),
             "combo_space_right": ([16, 17], ["BASE"], [("kp", ["SPACE"])]),
             "combo_space_left": ([12, 13], ["BASE"], [("kp", ["SPACE"])]),
@@ -215,7 +215,7 @@ class KeymapTests(unittest.TestCase):
         for name, (positions, layers, actions) in expected.items():
             with self.subTest(combo=name):
                 body = node_body(name)
-                self.assertIn("timeout-ms = <50>;", body)
+                self.assertIn("timeout-ms = <80>;", body)
                 self.assertEqual(
                     [int(n) for n in re.search(r"key-positions = <([^>]+)>", body)[1].split()],
                     positions,
@@ -243,6 +243,7 @@ class KeymapTests(unittest.TestCase):
     def test_overlapping_combos(self):
         for shorter, longer in (
             ("combo_backspace", "combo_number"),
+            ("combo_delete", "combo_number"),
             ("combo_space_right", "combo_enter_right"),
             ("combo_space_left", "combo_enter_left"),
             ("combo_tab", "combo_function"),
@@ -255,10 +256,17 @@ class KeymapTests(unittest.TestCase):
                 ]
                 self.assertLess(positions[0], positions[1])
                 for body in bodies:
-                    self.assertIn("timeout-ms = <50>;", body)
+                    self.assertIn("timeout-ms = <80>;", body)
                     self.assertIn(
                         "BASE", re.search(r"layers = <([^>]+)>", body)[1].split()
                     )
+
+    def test_home_row_mod_timing(self):
+        body = node_body("home_row_mods")
+        self.assertIn("tapping-term-ms = <300>;", body)
+        self.assertIn("require-prior-idle-ms = <175>;", body)
+        self.assertIn("quick-tap-ms = <175>;", body)
+        self.assertIn('flavor = "balanced";', body)
 
 
 if __name__ == "__main__":

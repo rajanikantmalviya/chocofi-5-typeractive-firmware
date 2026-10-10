@@ -37,9 +37,9 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             display-name = "Home Row Mods";
-            tapping-term-ms = <250>;
+            tapping-term-ms = <300>;
             quick-tap-ms = <175>;
-            require-prior-idle-ms = <125>;
+            require-prior-idle-ms = <175>;
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
         };
@@ -99,77 +99,77 @@
         compatible = "zmk,combos";
 
         combo_backspace {
-            timeout-ms = <50>;
-            key-positions = <7 8>;
+            timeout-ms = <80>;
+            key-positions = <6 7>;
             layers = <BASE>;
             bindings = <&kp BSPC>;
         };
 
         combo_delete {
-            timeout-ms = <50>;
-            key-positions = <18 19>;
+            timeout-ms = <80>;
+            key-positions = <7 8>;
             layers = <BASE>;
             bindings = <&kp DEL>;
         };
 
         combo_enter_right {
-            timeout-ms = <50>;
+            timeout-ms = <80>;
             key-positions = <16 17 18>;
             layers = <BASE>;
             bindings = <&kp RET>;
         };
 
         combo_space_right {
-            timeout-ms = <50>;
+            timeout-ms = <80>;
             key-positions = <16 17>;
             layers = <BASE>;
             bindings = <&kp SPACE>;
         };
 
         combo_space_left {
-            timeout-ms = <50>;
+            timeout-ms = <80>;
             key-positions = <12 13>;
             layers = <BASE>;
             bindings = <&kp SPACE>;
         };
 
         combo_enter_left {
-            timeout-ms = <50>;
+            timeout-ms = <80>;
             key-positions = <11 12 13>;
             layers = <BASE>;
             bindings = <&kp RET>;
         };
 
         combo_escape {
-            timeout-ms = <50>;
+            timeout-ms = <80>;
             key-positions = <0 1>;
             layers = <BASE>;
             bindings = <&kp ESC>;
         };
 
         combo_tab {
-            timeout-ms = <50>;
+            timeout-ms = <80>;
             key-positions = <1 2>;
             layers = <BASE>;
             bindings = <&kp TAB>;
         };
 
         combo_number {
-            timeout-ms = <50>;
+            timeout-ms = <80>;
             key-positions = <6 7 8>;
             layers = <BASE NUMBER>;
             bindings = <&tog NUMBER>;
         };
 
         combo_function {
-            timeout-ms = <50>;
+            timeout-ms = <80>;
             key-positions = <1 2 3>;
             layers = <BASE>;
             bindings = <&td_func>;
         };
 
         combo_shift {
-            timeout-ms = <50>;
+            timeout-ms = <80>;
             key-positions = <10 11>;
             layers = <BASE NAV NUMBER FUNC NUMBER_SHIFT>;
             bindings = <&kt LSHIFT>;
