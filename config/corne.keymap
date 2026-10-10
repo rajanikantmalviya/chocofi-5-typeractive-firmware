@@ -44,6 +44,32 @@
             bindings = <&kp>, <&kp>;
         };
 
+        hrm_left: home_row_mods_left {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            display-name = "Home Row Mods Left";
+            tapping-term-ms = <300>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <175>;
+            flavor = "balanced";
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 25 26 27 28 29 33 34 35>;
+            hold-trigger-on-release;
+        };
+
+        hrm_right: home_row_mods_right {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            display-name = "Home Row Mods Right";
+            tapping-term-ms = <300>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <175>;
+            flavor = "balanced";
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 30 31 32>;
+            hold-trigger-on-release;
+        };
+
         td_func: function_tap_dance {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
@@ -154,13 +180,6 @@
             bindings = <&kp TAB>;
         };
 
-        combo_number {
-            timeout-ms = <80>;
-            key-positions = <6 7 8>;
-            layers = <BASE NUMBER>;
-            bindings = <&tog NUMBER>;
-        };
-
         combo_function {
             timeout-ms = <80>;
             key-positions = <1 2 3>;
@@ -189,7 +208,7 @@
                         display-name = "Base";
                         bindings = <
    &kp Q         &kp W        &kp E        &kp R        &kp T     &kp Y     &kp U        &kp I        &kp O         &kp P
-   &hrm LSHIFT A &hrm LCTRL S &hrm LGUI D  &hrm LALT F  &kp G     &kp H     &hrm RALT J &hrm RGUI K &hrm RCTRL L  &hrm RSHIFT SEMI
+   &hrm_left LSHIFT A &hrm_left LCTRL S &hrm_left LGUI D &hrm_left LALT F &kp G &kp H &hrm_right RALT J &hrm_right RGUI K &hrm_right RCTRL L &hrm_right RSHIFT SEMI
    &kp Z         &kp X        &kp C        &kp V        &kp B     &kp N     &kp M        &kp COMMA    &kp DOT       &kp FSLH
                              &lt FUNC ESC &lt NUMBER TAB &lt NAV SPACE     &lt NAV RET &lt NUMBER DEL &kp BSPC
                         >;

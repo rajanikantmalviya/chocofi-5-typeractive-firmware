@@ -68,6 +68,8 @@ KEYS.update(
 BEHAVIORS = {
     "kp": "Key Press",
     "hrm": "Home Row Mods",
+    "hrm_left": "Home Row Mods",
+    "hrm_right": "Home Row Mods",
     "lt": "Layer-Tap",
     "none": "None",
     "trans": "Transparent",
@@ -205,13 +207,13 @@ class KeymapTests(unittest.TestCase):
             "combo_enter_left": ([11, 12, 13], ["BASE"], [("kp", ["RET"])]),
             "combo_escape": ([0, 1], ["BASE"], [("kp", ["ESC"])]),
             "combo_tab": ([1, 2], ["BASE"], [("kp", ["TAB"])]),
-            "combo_number": ([6, 7, 8], ["BASE", "NUMBER"], [("tog", ["NUMBER"])]),
             "combo_function": ([1, 2, 3], ["BASE"], [("td_func", [])]),
             "combo_shift": ([10, 11], list(LAYERS), [("kt", ["LSHIFT"])]),
         }
         self.assertEqual(
             set(re.findall(r"\b(combo_\w+)\s*\{", KEYMAP)), set(expected)
         )
+        self.assertNotRegex(KEYMAP, r"\bcombo_number\b")
         for name, (positions, layers, actions) in expected.items():
             with self.subTest(combo=name):
                 body = node_body(name)
@@ -242,8 +244,6 @@ class KeymapTests(unittest.TestCase):
 
     def test_overlapping_combos(self):
         for shorter, longer in (
-            ("combo_backspace", "combo_number"),
-            ("combo_delete", "combo_number"),
             ("combo_space_right", "combo_enter_right"),
             ("combo_space_left", "combo_enter_left"),
             ("combo_tab", "combo_function"),
@@ -262,11 +262,31 @@ class KeymapTests(unittest.TestCase):
                     )
 
     def test_home_row_mod_timing(self):
-        body = node_body("home_row_mods")
-        self.assertIn("tapping-term-ms = <300>;", body)
-        self.assertIn("require-prior-idle-ms = <175>;", body)
-        self.assertIn("quick-tap-ms = <175>;", body)
-        self.assertIn('flavor = "balanced";', body)
+        for name in ("home_row_mods", "home_row_mods_left", "home_row_mods_right"):
+            with self.subTest(behavior=name):
+                body = node_body(name)
+                self.assertIn("tapping-term-ms = <300>;", body)
+                self.assertIn("require-prior-idle-ms = <175>;", body)
+                self.assertIn("quick-tap-ms = <175>;", body)
+                self.assertIn('flavor = "balanced";', body)
+                self.assertEqual(bindings(body), [("kp", []), ("kp", [])])
+
+    def test_opposite_hand_home_row_mods(self):
+        left_positions = set(range(0, 5)) | set(range(10, 15)) | set(range(20, 25)) | {30, 31, 32}
+        right_positions = set(range(36)) - left_positions
+        for hand, triggers in (("left", right_positions), ("right", left_positions)):
+            with self.subTest(hand=hand):
+                body = node_body(f"home_row_mods_{hand}")
+                self.assertIn(f'display-name = "Home Row Mods {hand.title()}";', body)
+                self.assertIn("hold-trigger-on-release;", body)
+                actual = re.search(r"hold-trigger-key-positions = <([^>]+)>", body)[1]
+                self.assertEqual([int(position) for position in actual.split()], sorted(triggers))
+        base = bindings(node_body("default_layer"))
+        for position in (10, 11, 12, 13):
+            self.assertEqual(base[position][0], "hrm_left")
+        for position in (16, 17, 18, 19):
+            self.assertEqual(base[position][0], "hrm_right")
+        self.assertNotIn("hold-trigger-key-positions", node_body("home_row_mods"))
 
 
 if __name__ == "__main__":

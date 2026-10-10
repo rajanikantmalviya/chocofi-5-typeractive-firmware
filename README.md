@@ -14,7 +14,8 @@ ignored. Unassigned behavior-ID-0 entries within an active layer are disabled
 with `&none`.
 
 The seed's four layers are **Base**, **Nav** (layer 1), **Number** (layer 2), and
-**Func** (layer 3). All 36 exported bindings per layer are preserved. Number now
+**Func** (layer 3). All 36 exported hold/tap parameters are preserved; home-row
+mods use hand-specific behaviors instead of the seed's generic behavior. Number now
 uses plain key presses, not auto-shift. **Number + Shift** (layer 4) mirrors its
 enabled keys with Shift applied, and layer 5 remains reserved for Studio.
 
@@ -48,8 +49,11 @@ The base home-row modifier holds are:
 
 ## Home-row mods in ZMK Studio
 
-The custom **Home Row Mods** behavior (`&hrm`) implements the base modifier holds
-and is available for additional assignments in Studio.
+The custom **Home Row Mods Left** (`&hrm_left`) and **Home Row Mods Right**
+(`&hrm_right`) behaviors implement the base modifier holds. Choose the behavior
+for the hand where the key is physically located.
+The old **Home Row Mods** (`&hrm`) remains available for saved Studio bindings,
+but has no opposite-hand filtering.
 The standard **Mod-Tap** behavior is also available, but uses hold-preferred
 handling rather than the typing-friendly settings below.
 
@@ -59,9 +63,10 @@ handling rather than the typing-friendly settings below.
    If you previously saved a Studio keymap, use **Restore Stock Settings** to load
    the updated base layout. This discards your saved Studio keymap, so record any
    customizations first. Flashing alone does not replace a saved Studio keymap.
-3. Select a home-row key and choose **Home Row Mods**. Set parameter 1 to the
+3. Select a home-row key and choose **Home Row Mods Left** or **Home Row Mods Right**.
+   Set parameter 1 to the
    modifier sent when held and parameter 2 to the key sent when tapped. For
-   example, `&hrm LCTRL A` sends Ctrl on hold and A on tap.
+   example, `&hrm_left LCTRL A` sends Ctrl on hold and A on tap.
 4. Save your changes in Studio. Repeat for any other keys you want to configure.
 
 Assigning Home Row Mods to an auto-shift key replaces auto-shift on that key:
@@ -71,12 +76,25 @@ The behavior uses balanced hold-tap handling with a 300 ms tapping term, a
 175 ms quick-tap window for tap-then-hold repetition, and a 175 ms prior-idle
 requirement to reduce accidental modifiers during fast typing. Balanced handling
 also resolves a hold when another key is pressed and released while it is held.
+The hand-specific behaviors filter that decision to opposite-hand positions,
+including only the opposite hand's three thumb keys. Same-hand key releases
+resolve an undecided home-row mod as a tap. `hold-trigger-on-release` defers
+the positional check until release, allowing modifiers to be stacked.
 Studio can change the hold modifier and tap key, but not these timing or flavor
-settings. To tune those, edit `hrm` in `config/corne.keymap`, rebuild, and reflash.
+settings. To tune those, edit the hand-specific behaviors in
+`config/corne.keymap`, rebuild, and reflash.
 The longer hold threshold and prior-idle requirement reduce accidental modifier
 holds, but also require more deliberate holds and a longer pause after typing.
 Balanced handling can still resolve a modifier before 300 ms when another key
-is pressed and released.
+is pressed and released on the opposite hand. Holding a key by itself past
+300 ms still activates its modifier; this is not a ban on deliberate same-hand
+shortcuts after the modifier has resolved.
+
+Saved Studio assignments to the old **Home Row Mods** do not gain filtering
+automatically. Reassign A/S/D/F to **Home Row Mods Left** and J/K/L/semicolon to
+**Home Row Mods Right**, preserving their parameters, or restore stock settings
+after recording any customizations. Keep the selected layout at **5 Column**:
+combo and positional hold-tap indices are defined for that layout.
 
 ## Mouse actions in ZMK Studio
 
@@ -118,30 +136,36 @@ all keys arrive within that window; for example, J+K+L sends Enter, not Space.
 | S+D+F | Enter |
 | Q+W | Esc |
 | W+E | Tab |
-| U+I+O | Toggle Number on/off |
 | A+S | Toggle Left Shift Lock on/off |
 
 L+; no longer has a combo. The wider 80 ms chord window makes staggered presses
 easier to recognize, but may add delay to shorter overlapping chords and make
-ordinary typing rolls more likely to trigger a combo. U+I+O takes precedence
-over U+I and I+O when all three keys arrive within that window.
+ordinary typing rolls more likely to trigger a combo.
 
-U+I+O uses `&tog NUMBER` on both Base and Number, so the same chord turns the
-layer on and off. A+S uses `&kt LSHIFT` on all five active layers; Shift stays
+**Troubleshooting trial:** U+I+O's Number toggle is temporarily disabled to
+isolate U+I Backspace and I+O Delete from their shared three-key overlap.
+Their positions, Base scope, and 80 ms window are unchanged. Live read-only
+Studio diagnostics confirmed the 5-column layout and U/I/O bindings at
+positions 6/7/8; this trial does not establish the cause of the physical failure.
+Test U+I and I+O separately after flashing, in both press orders, along with
+ordinary U/I/O typing. Number remains accessible by holding Tab or Delete,
+or by assigning **Layer Toggle** for layer 2 to a key in Studio.
+
+A+S uses `&kt LSHIFT` on all five active layers; Shift stays
 held until the chord is pressed again or Shift is otherwise released.
-Neither toggle has a tap-dance delay or a double-tap action. Release all chord
+The Shift toggle has no tap-dance delay or double-tap action. Release all chord
 keys before repeating a chord.
 
-U+I+O+P has no dedicated combo or tap-dance action. Its U+I+O subset can still
-trigger the Number toggle, so it should not be used as a separate gesture.
+U+I+O and U+I+O+P have no dedicated action during this trial. Their U+I or I+O
+subsets can trigger an editing combo, so do not use them as separate gestures.
 
 W+E+R retains the existing one-shot Func action on Base. This is the only
 remaining tap-dance behavior, has one action, and resolves immediately.
 The standard one-shot layer expires after 1 second if unused.
 
 The Number + Shift layer remains available in Studio, but no longer has a
-dedicated chord. For shifted numbers using the new toggles, enable Number with
-U+I+O and Shift Lock with A+S; disable them independently with the same chords.
+dedicated chord. For shifted numbers, hold Tab or Delete for Number and toggle
+Shift Lock with A+S, or use a Studio-assigned Number toggle.
 Later Studio edits to Number do not automatically update its shifted copy.
 
 Studio can assign the standard Layer Toggle and Key Toggle behaviors, and the
@@ -152,5 +176,7 @@ reassign any saved Studio bindings that used them, or restore stock settings.
 ## Checking the configuration
 
 Run `python -m unittest discover -s tests` to check seed fidelity, the shifted
-Number layer, combo positions/scopes, and tap-dance actions. GitHub Actions builds
+Number layer, combo positions/scopes, tap-dance actions, and opposite-hand
+home-row assignments. These checks validate definitions, not physical key-event
+delivery or combo recognition. GitHub Actions builds
 the firmware for both halves.
