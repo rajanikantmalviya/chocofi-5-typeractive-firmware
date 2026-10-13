@@ -4,3 +4,4 @@ build:
   kconfig: viewer/Kconfig
   settings:
     snippet_root: .
+    dts_root: .

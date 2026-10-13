@@ -6,3 +6,11 @@ config ZMK_KEYBOARD_VIEWER
       Provide layout, live bindings, combos, physical positions and active layers
       on a separate USB CDC interface. No data is sent without host requests.
       This never changes bindings or consumes keyboard events.
+
+config ZMK_MOUSE_SPEED
+    bool "Studio-adjustable mouse speed"
+    default y
+    depends on ZMK_POINTING && DT_HAS_ZMK_BEHAVIOR_MOUSE_SPEED_ENABLED
+    help
+      Add a Mouse Speed (%) behavior that selects a runtime percentage of
+      keyboard cursor movement without changing acceleration or scrolling.

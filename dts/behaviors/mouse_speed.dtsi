@@ -1,0 +1,18 @@
+/ {
+    behaviors {
+        mouse_speed: mouse_speed {
+            compatible = "zmk,behavior-mouse-speed";
+            #binding-cells = <1>;
+            display-name = "Mouse Speed (%)";
+        };
+    };
+
+    mouse_speed_scaler: mouse_speed_scaler {
+        compatible = "zmk,input-processor-mouse-speed";
+        #input-processor-cells = <0>;
+    };
+};
+
+&mmv_input_listener {
+    input-processors = <&mouse_speed_scaler>;
+};

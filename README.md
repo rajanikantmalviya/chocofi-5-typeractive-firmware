@@ -171,6 +171,39 @@ connection, forget the keyboard on the host, clear the corresponding keyboard
 bond using `&bt BT_CLR`, and pair again so the host refreshes the descriptor.
 See [ZMK's mouse emulation documentation](https://zmk.dev/docs/keymaps/behaviors/mouse-emulation).
 
+### Runtime mouse speed percentages
+
+After flashing the updated left-half firmware, assign **Mouse Speed (%)** in
+Studio and enter the desired percentage in **Percentage (100 = normal)**.
+Use **100**, **150**, **200**, **300**, or another positive integer. Save the key
+assignments in Studio.
+
+| Parameter | Selected speed | Default maximum movement rate |
+| --- | --- | --- |
+| `100` | Normal / reset | 600 units/second |
+| `150` | 1.5 times normal | 900 units/second |
+| `200` | Twice normal | 1200 units/second |
+| `300` | Three times normal | 1800 units/second |
+
+Pressing an assigned key selects that speed until another percentage key is
+pressed or the keyboard restarts. Releasing the key does not reset it.
+Restarting returns to **100%**; the saved key mappings remain available.
+Percentages below 100 slow the cursor. These are firmware movement units, not
+guaranteed screen pixels; host pointer settings also affect the visible speed.
+Extreme values saturate at the signed 16-bit movement limit rather than
+overflowing or reversing direction.
+
+This scales only keyboard cursor movement through `&mmv`, including the
+existing Mouse Move macros. It does not change the 300 ms acceleration ramp,
+scrolling, mouse clicks, another mouse/trackpad, or the current key assignments.
+Do not restore stock settings just to enable it: existing saved bindings remain
+usable, and you can assign the new behavior in Studio.
+
+For bindings edited in the firmware source, use `&mouse_speed 150`,
+`&mouse_speed 200`, `&mouse_speed 300`, and `&mouse_speed 100`. The standard
+module registration includes this feature in future builds independently of
+the optional viewer; the viewer's USB interface remains enabled.
+
 ## Combos and tap dances
 
 These combos are recognized on Base. Press all chord keys within 80 ms.

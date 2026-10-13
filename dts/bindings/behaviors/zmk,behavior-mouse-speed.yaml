@@ -1,0 +1,5 @@
+description: Select a runtime percentage of keyboard mouse movement speed
+
+compatible: "zmk,behavior-mouse-speed"
+
+include: one_param.yaml
