@@ -3,6 +3,57 @@
 This configuration targets a 36-key Chocofi with nice!nano v2 controllers and
 nice!view displays. ZMK Studio is enabled over USB on the left half.
 
+## Optional standalone keyboard viewer
+
+The left-half build now uses the `studio-viewer-usb` snippet. It retains the
+existing Studio RPC port and adds a **second, read-only USB serial interface**
+for the standalone ZMK Keyboard Viewer. The right-half build is unchanged.
+Flash the new left-half UF2 to enable the viewer; do not reset saved Studio
+settings or restore stock bindings just to enable telemetry.
+
+The module exports the selected physical layout, current in-memory layer
+bindings and names (including Studio edits), behavior child actions, and
+compiled combo definitions. Physical presses are observed before combo and
+hold-tap event capture, without consuming or changing the original event.
+Snapshots include actual active layers and each held key's originating layer.
+The viewer is a learning display, not an input device or keymap editor.
+
+**The keyboard works normally with both apps closed, either one open, or both
+open.** Viewer data is sent only in response to requests on its own port.
+Studio can continue using its original port. No host requests means no
+telemetry transmission or periodic viewer work. A small physical-position
+bitset is maintained on the central half; a low-priority worker handles all
+serialization and USB transmission, with bounded queues and transmit timeouts.
+Neither USB backpressure nor a crashed/disconnected viewer waits in the HID,
+combo, or hold-tap processing path. Scanning and behavior timing are unchanged.
+There is some additional RAM/flash and CPU cost; hardware latency and power
+measurements are still required before claiming negligible impact.
+
+The normal reusable build workflow automatically loads this repository as a
+Zephyr module via `zephyr/module.yml`. To build manually with ZMK v0.3:
+
+```text
+west build -s zmk/app -b nice_nano_v2 -S studio-viewer-usb -- -DZMK_CONFIG=<repo>/config -DZMK_EXTRA_MODULES=<repo> -DSHIELD="corne_left nice_view_adapter nice_view"
+```
+
+To disable the extension entirely, switch the left build's snippet back to
+`studio-rpc-usb-uart` and rebuild; the module defaults to disabled.
+Keep **5 Column** selected: existing combo/hold-trigger positions use that
+layout. After keymap edits, reload the viewer's keymap.
+
+### Viewer USB protocol v1
+
+The viewer interface accepts only `C` (configuration) and `S` (snapshot).
+Responses are newline-delimited JSON. `C` sends `hello` (version 1), physical
+`key` records (geometry in hundredths of a key unit/degrees), `behavior`
+records, current `layer` records, compiled `combo` records and a `ready`
+delimiter. Bindings are `[behaviorId, param1, param2]`; hold-tap child 0 is hold
+and child 1 is tap. Layer IDs are stable IDs, not display-order indices.
+`S` returns `state` with `sequence`, `pressed` pairs `[position, originLayer]`,
+`released` positions since the previous snapshot and active `layers` in
+highest-priority-first order. Snapshots reconcile state without an unbounded
+event backlog. The interface honors Studio locking and has no write commands.
+
 ## Default keymap seed
 
 `Corne-keymap.json` is the source export used to seed the compiled defaults in

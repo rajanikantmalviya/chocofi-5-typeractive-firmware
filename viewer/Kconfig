@@ -1,0 +1,8 @@
+config ZMK_KEYBOARD_VIEWER
+    bool "Read-only USB keyboard viewer"
+    depends on ZMK_STUDIO && USB_CDC_ACM && UART_INTERRUPT_DRIVEN && UART_LINE_CTRL
+    depends on !ZMK_SPLIT || ZMK_SPLIT_ROLE_CENTRAL
+    help
+      Provide layout, live bindings, combos, physical positions and active layers
+      on a separate USB CDC interface. No data is sent without host requests.
+      This never changes bindings or consumes keyboard events.

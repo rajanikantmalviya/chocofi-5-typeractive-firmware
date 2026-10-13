@@ -1,0 +1,7 @@
+if(CONFIG_ZMK_KEYBOARD_VIEWER)
+  zephyr_library()
+  zephyr_library_include_directories(${APPLICATION_SOURCE_DIR}/include)
+  zephyr_library_sources(viewer.c)
+  zephyr_link_libraries(-Wl,--wrap=raise_zmk_position_state_changed)
+  zephyr_link_libraries(-Wl,--wrap=zmk_behavior_invoke_binding)
+endif()

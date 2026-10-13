@@ -1,0 +1,5 @@
+name: studio-viewer-usb
+append:
+  DTS_EXTRA_CPPFLAGS: -DZMK_BEHAVIORS_KEEP_ALL
+  EXTRA_DTC_OVERLAY_FILE: studio-viewer-usb.overlay
+  EXTRA_CONF_FILE: studio-viewer-usb.conf

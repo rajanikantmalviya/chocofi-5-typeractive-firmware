@@ -1,0 +1,6 @@
+name: keyboard-viewer
+build:
+  cmake: viewer
+  kconfig: viewer/Kconfig
+  settings:
+    snippet_root: .
