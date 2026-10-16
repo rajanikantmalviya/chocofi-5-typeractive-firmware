@@ -12,8 +12,12 @@
       "displayName": "Key Press"
     },
     {
-      "id": 22,
-      "displayName": "Home Row Mods"
+      "id": 35,
+      "displayName": "Home Row Mods Left"
+    },
+    {
+      "id": 36,
+      "displayName": "Home Row Mods Right"
     },
     {
       "id": 9,
@@ -24,16 +28,20 @@
       "displayName": "None"
     },
     {
-      "id": 27,
-      "displayName": "Mouse Move Up"
+      "id": 17,
+      "displayName": "To Layer"
+    },
+    {
+      "id": 23,
+      "displayName": "Mouse Key Press"
     },
     {
       "id": 31,
       "displayName": "Mouse Scroll Up"
     },
     {
-      "id": 23,
-      "displayName": "Mouse Key Press"
+      "id": 27,
+      "displayName": "Mouse Move Up"
     },
     {
       "id": 32,
@@ -48,16 +56,16 @@
       "displayName": "Mouse Move Right"
     },
     {
-      "id": 20,
-      "displayName": "Bluetooth"
-    },
-    {
-      "id": 21,
-      "displayName": "Transparent"
+      "id": 37,
+      "displayName": "Mouse Speed (%)"
     },
     {
       "id": 28,
       "displayName": "Mouse Scroll Down"
+    },
+    {
+      "id": 20,
+      "displayName": "Bluetooth"
     },
     {
       "id": 12,
@@ -120,22 +128,22 @@
           "param2": 0
         },
         {
-          "behaviorId": 22,
+          "behaviorId": 35,
           "param1": 458977,
           "param2": 458756
         },
         {
-          "behaviorId": 22,
+          "behaviorId": 35,
           "param1": 458976,
           "param2": 458774
         },
         {
-          "behaviorId": 22,
+          "behaviorId": 35,
           "param1": 458979,
           "param2": 458759
         },
         {
-          "behaviorId": 22,
+          "behaviorId": 35,
           "param1": 458978,
           "param2": 458761
         },
@@ -150,22 +158,22 @@
           "param2": 0
         },
         {
-          "behaviorId": 22,
+          "behaviorId": 36,
           "param1": 458982,
           "param2": 458765
         },
         {
-          "behaviorId": 22,
+          "behaviorId": 36,
           "param1": 458983,
           "param2": 458766
         },
         {
-          "behaviorId": 22,
+          "behaviorId": 36,
           "param1": 458980,
           "param2": 458767
         },
         {
-          "behaviorId": 22,
+          "behaviorId": 36,
           "param1": 458981,
           "param2": 458803
         },
@@ -185,9 +193,9 @@
           "param2": 0
         },
         {
-          "behaviorId": 4,
-          "param1": 458777,
-          "param2": 0
+          "behaviorId": 9,
+          "param1": 2,
+          "param2": 458777
         },
         {
           "behaviorId": 4,
@@ -200,9 +208,9 @@
           "param2": 0
         },
         {
-          "behaviorId": 4,
-          "param1": 458768,
-          "param2": 0
+          "behaviorId": 9,
+          "param1": 2,
+          "param2": 458768
         },
         {
           "behaviorId": 4,
@@ -226,13 +234,18 @@
         },
         {
           "behaviorId": 9,
-          "param1": 2,
+          "param1": 1,
           "param2": 458795
         },
         {
           "behaviorId": 9,
-          "param1": 1,
+          "param1": 4,
           "param2": 458796
+        },
+        {
+          "behaviorId": 9,
+          "param1": 4,
+          "param2": 458794
         },
         {
           "behaviorId": 9,
@@ -241,13 +254,8 @@
         },
         {
           "behaviorId": 9,
-          "param1": 2,
+          "param1": 3,
           "param2": 458828
-        },
-        {
-          "behaviorId": 4,
-          "param1": 458794,
-          "param2": 0
         },
         {
           "behaviorId": 0,
@@ -296,12 +304,12 @@
           "param2": 0
         },
         {
-          "behaviorId": 27,
+          "behaviorId": 11,
           "param1": 0,
           "param2": 0
         },
         {
-          "behaviorId": 31,
+          "behaviorId": 11,
           "param1": 0,
           "param2": 0
         },
@@ -336,28 +344,28 @@
           "param2": 0
         },
         {
-          "behaviorId": 23,
-          "param1": 2,
+          "behaviorId": 4,
+          "param1": 458977,
           "param2": 0
         },
         {
-          "behaviorId": 32,
+          "behaviorId": 4,
+          "param1": 458976,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458979,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458978,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
           "param1": 0,
-          "param2": 0
-        },
-        {
-          "behaviorId": 26,
-          "param1": 0,
-          "param2": 0
-        },
-        {
-          "behaviorId": 33,
-          "param1": 0,
-          "param2": 0
-        },
-        {
-          "behaviorId": 23,
-          "param1": 1,
           "param2": 0
         },
         {
@@ -381,38 +389,38 @@
           "param2": 0
         },
         {
+          "behaviorId": 4,
+          "param1": 458795,
+          "param2": 0
+        },
+        {
           "behaviorId": 11,
           "param1": 0,
           "param2": 0
         },
         {
-          "behaviorId": 20,
+          "behaviorId": 11,
           "param1": 0,
           "param2": 0
         },
         {
-          "behaviorId": 21,
+          "behaviorId": 11,
           "param1": 0,
           "param2": 0
         },
         {
-          "behaviorId": 21,
+          "behaviorId": 11,
           "param1": 0,
           "param2": 0
         },
         {
-          "behaviorId": 28,
+          "behaviorId": 11,
           "param1": 0,
           "param2": 0
         },
         {
-          "behaviorId": 21,
+          "behaviorId": 11,
           "param1": 0,
-          "param2": 0
-        },
-        {
-          "behaviorId": 23,
-          "param1": 1,
           "param2": 0
         },
         {
@@ -558,12 +566,12 @@
         },
         {
           "behaviorId": 4,
-          "param1": 458798,
+          "param1": 458797,
           "param2": 0
         },
         {
-          "behaviorId": 11,
-          "param1": 0,
+          "behaviorId": 4,
+          "param1": 458798,
           "param2": 0
         },
         {
@@ -602,7 +610,7 @@
           "param2": 0
         },
         {
-          "behaviorId": 11,
+          "behaviorId": 17,
           "param1": 0,
           "param2": 0
         },
@@ -714,6 +722,222 @@
       ]
     },
     {
+      "id": 4,
+      "name": "Mouse",
+      "bindings": [
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 23,
+          "param1": 8,
+          "param2": 0
+        },
+        {
+          "behaviorId": 31,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 27,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 23,
+          "param1": 16,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458977,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458976,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458979,
+          "param2": 0
+        },
+        {
+          "behaviorId": 4,
+          "param1": 458978,
+          "param2": 0
+        },
+        {
+          "behaviorId": 23,
+          "param1": 1,
+          "param2": 0
+        },
+        {
+          "behaviorId": 23,
+          "param1": 1,
+          "param2": 0
+        },
+        {
+          "behaviorId": 32,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 26,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 33,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 23,
+          "param1": 2,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 37,
+          "param1": 100,
+          "param2": 0
+        },
+        {
+          "behaviorId": 37,
+          "param1": 200,
+          "param2": 0
+        },
+        {
+          "behaviorId": 37,
+          "param1": 400,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 28,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 11,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 23,
+          "param1": 1,
+          "param2": 0
+        },
+        {
+          "behaviorId": 23,
+          "param1": 2,
+          "param2": 0
+        },
+        {
+          "behaviorId": 23,
+          "param1": 4,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        },
+        {
+          "behaviorId": 0,
+          "param1": 0,
+          "param2": 0
+        }
+      ]
+    },
+    {
       "id": 3,
       "name": "Func",
       "bindings": [
@@ -778,12 +1002,12 @@
           "param2": 0
         },
         {
-          "behaviorId": 0,
+          "behaviorId": 11,
           "param1": 0,
           "param2": 0
         },
         {
-          "behaviorId": 0,
+          "behaviorId": 11,
           "param1": 0,
           "param2": 0
         },
@@ -793,7 +1017,7 @@
           "param2": 0
         },
         {
-          "behaviorId": 0,
+          "behaviorId": 11,
           "param1": 0,
           "param2": 0
         },
@@ -838,29 +1062,29 @@
           "param2": 0
         },
         {
-          "behaviorId": 0,
+          "behaviorId": 11,
           "param1": 0,
           "param2": 0
         },
         {
-          "behaviorId": 0,
-          "param1": 0,
+          "behaviorId": 20,
+          "param1": 3,
           "param2": 0
         },
         {
-          "behaviorId": 0,
-          "param1": 0,
-          "param2": 0
+          "behaviorId": 20,
+          "param1": 3,
+          "param2": 1
         },
         {
-          "behaviorId": 0,
-          "param1": 0,
-          "param2": 0
+          "behaviorId": 20,
+          "param1": 3,
+          "param2": 2
         },
         {
-          "behaviorId": 0,
-          "param1": 0,
-          "param2": 0
+          "behaviorId": 20,
+          "param1": 3,
+          "param2": 4
         },
         {
           "behaviorId": 4,
@@ -868,32 +1092,32 @@
           "param2": 0
         },
         {
-          "behaviorId": 0,
+          "behaviorId": 11,
           "param1": 0,
           "param2": 0
         },
         {
-          "behaviorId": 0,
+          "behaviorId": 11,
           "param1": 0,
           "param2": 0
         },
         {
-          "behaviorId": 0,
+          "behaviorId": 11,
           "param1": 0,
           "param2": 0
         },
         {
-          "behaviorId": 0,
+          "behaviorId": 11,
           "param1": 0,
           "param2": 0
         },
         {
-          "behaviorId": 0,
+          "behaviorId": 11,
           "param1": 0,
           "param2": 0
         },
         {
-          "behaviorId": 0,
+          "behaviorId": 11,
           "param1": 0,
           "param2": 0
         },

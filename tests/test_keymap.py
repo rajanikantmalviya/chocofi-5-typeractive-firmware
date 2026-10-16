@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SEED = json.loads((ROOT / "Corne-keymap.json").read_text())
 KEYMAP = (ROOT / "config" / "corne.keymap").read_text()
-LAYERS = {"BASE": 0, "NAV": 1, "NUMBER": 2, "FUNC": 3, "NUMBER_SHIFT": 4}
+LAYERS = {"BASE": 0, "NAV": 1, "NUMBER": 2, "FUNC": 3, "MOUSE": 4, "NUMBER_SHIFT": 5}
 KEYS = {chr(ord("A") + i): 0x70004 + i for i in range(26)}
 KEYS.update({f"N{i}": 0x7001D + i for i in range(1, 10)})
 KEYS["N0"] = 0x70027
@@ -68,14 +68,16 @@ KEYS.update(
 BEHAVIORS = {
     "kp": "Key Press",
     "hrm": "Home Row Mods",
-    "hrm_left": "Home Row Mods",
-    "hrm_right": "Home Row Mods",
+    "hrm_left": "Home Row Mods Left",
+    "hrm_right": "Home Row Mods Right",
     "lt": "Layer-Tap",
     "none": "None",
     "trans": "Transparent",
     "mkp": "Mouse Key Press",
     "bt": "Bluetooth",
     "out": "Output Selection",
+    "to": "To Layer",
+    "mouse_speed": "Mouse Speed (%)",
 }
 for category in ("move", "scroll"):
     for direction in ("left", "right", "up", "down"):
@@ -137,9 +139,9 @@ class KeymapTests(unittest.TestCase):
         self.assertEqual(SEED["version"], 1)
         self.assertEqual(SEED["physicalLayout"]["keyCount"], 36)
         names = {item["id"]: item["displayName"] for item in SEED["behaviors"]}
-        nodes = ["default_layer", "nav_layer", "number_layer", "function_layer"]
+        nodes = ["default_layer", "nav_layer", "number_layer", "function_layer", "mouse_layer"]
         self.assertEqual(len(SEED["layers"]), len(nodes))
-        for layer, node in zip(SEED["layers"], nodes):
+        for layer, node in zip(sorted(SEED["layers"], key=lambda item: item["id"]), nodes):
             body = node_body(node)
             self.assertIn(f'display-name = "{layer["name"]}";', body)
             actual = bindings(body)
@@ -174,6 +176,7 @@ class KeymapTests(unittest.TestCase):
                 "nav_layer",
                 "number_layer",
                 "function_layer",
+                "mouse_layer",
                 "shifted_number_layer",
                 "extra_3",
             ],
@@ -188,7 +191,7 @@ class KeymapTests(unittest.TestCase):
         self.assertEqual(len(shifted), 36)
         for original, modified in zip(normal, shifted):
             with self.subTest(binding=original):
-                if original[0] == "none":
+                if original[0] != "kp":
                     self.assertEqual(modified, original)
                 else:
                     self.assertEqual(original[0], "kp")
@@ -289,6 +292,23 @@ class KeymapTests(unittest.TestCase):
         for position in (16, 17, 18, 19):
             self.assertEqual(base[position][0], "hrm_right")
         self.assertNotIn("hold-trigger-key-positions", node_body("home_row_mods"))
+
+    def test_home_row_layer_tap(self):
+        body = node_body("home_row_layer_tap")
+        self.assertIn('compatible = "zmk,behavior-hold-tap";', body)
+        self.assertIn("#binding-cells = <2>;", body)
+        self.assertIn('display-name = "Home Row Layer Tap";', body)
+        self.assertIn("tapping-term-ms = <300>;", body)
+        self.assertIn("quick-tap-ms = <175>;", body)
+        self.assertIn("require-prior-idle-ms = <175>;", body)
+        self.assertIn('flavor = "balanced";', body)
+        self.assertEqual(bindings(body), [("mo", []), ("kp", [])])
+        self.assertNotIn("hold-trigger-key-positions", body)
+        self.assertNotIn("retro-tap", body)
+        self.assertNotRegex(KEYMAP, r"&hrlt\b")
+        self.assertNotIn("Home Row Layer Tap", {
+            behavior["displayName"] for behavior in SEED["behaviors"]
+        })
 
 
 if __name__ == "__main__":

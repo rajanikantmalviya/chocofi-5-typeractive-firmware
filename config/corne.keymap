@@ -10,12 +10,14 @@
 #include <dt-bindings/zmk/pointing.h>
 #include <dt-bindings/zmk/outputs.h>
 #include <behaviors/mouse_speed.dtsi>
+#include <behaviors/runtime_macro.dtsi>
 
 #define BASE 0
 #define NAV 1
 #define NUMBER 2
 #define FUNC 3
-#define NUMBER_SHIFT 4
+#define MOUSE 4
+#define NUMBER_SHIFT 5
 
 #define AS(keycode) &as LS(keycode) keycode
 
@@ -71,6 +73,17 @@
             hold-trigger-on-release;
         };
 
+        hrlt: home_row_layer_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            display-name = "Home Row Layer Tap";
+            tapping-term-ms = <300>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <175>;
+            flavor = "balanced";
+            bindings = <&mo>, <&kp>;
+        };
+
         td_func: function_tap_dance {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
@@ -79,7 +92,7 @@
             bindings = <&sl FUNC>;
         };
 
-        // Fixed-parameter macros expose movement and scrolling in Studio on ZMK v0.3.
+        // Runtime format v1 cannot represent pause-for-release; retain native movement.
         ZMK_MACRO(mouse_move_left,
             display-name = "Mouse Move Left";
             wait-ms = <0>;
@@ -123,7 +136,7 @@
     };
 
     combos {
-        compatible = "zmk,combos";
+        compatible = "cormoran,runtime-combo-defaults";
 
         combo_backspace {
             timeout-ms = <80>;
@@ -198,7 +211,7 @@
         combo_shift {
             timeout-ms = <80>;
             key-positions = <10 11>;
-            layers = <BASE NAV NUMBER FUNC NUMBER_SHIFT>;
+            layers = <BASE NAV NUMBER FUNC MOUSE NUMBER_SHIFT>;
             bindings = <&kt LSHIFT>;
         };
     };
@@ -207,70 +220,250 @@
                 compatible = "zmk,keymap";
 
                 default_layer {
-// -----------------------------------------------------------------------------------------
-// |  Q  |  W  |  E  |  R  |  T  |     |  Y  |  U  |  I  |  O  |  P  |
-// |  A  |  S  |  D  |  F  |  G  |     |  H  |  J  |  K  |  L  |  ;  |
-// |  Z  |  X  |  C  |  V  |  B  |     |  N  |  M  |  ,  |  .  |  /  |
-//             | ESC | TAB | SPC |     | ENT | DEL | BSPC |
-// Esc holds Func; Tab/Delete hold Number; Space/Enter hold Nav.
-                        display-name = "Base";
-                        bindings = <
-   &kp Q         &kp W        &kp E        &kp R        &kp T     &kp Y     &kp U        &kp I        &kp O         &kp P
-   &hrm_left LSHIFT A &hrm_left LCTRL S &hrm_left LGUI D &hrm_left LALT F &kp G &kp H &hrm_right RALT J &hrm_right RGUI K &hrm_right RCTRL L &hrm_right RSHIFT SEMI
-   &kp Z         &kp X        &kp C        &kp V        &kp B     &kp N     &kp M        &kp COMMA    &kp DOT       &kp FSLH
-                             &lt FUNC ESC &lt NUMBER TAB &lt NAV SPACE     &lt NAV RET &lt NUMBER DEL &kp BSPC
-                        >;
+                    display-name = "Base";
+                    bindings = <
+                        &kp 458772
+                        &kp 458778
+                        &kp 458760
+                        &kp 458773
+                        &kp 458775
+                        &kp 458780
+                        &kp 458776
+                        &kp 458764
+                        &kp 458770
+                        &kp 458771
+                        &hrm_left 458977 458756
+                        &hrm_left 458976 458774
+                        &hrm_left 458979 458759
+                        &hrm_left 458978 458761
+                        &kp 458762
+                        &kp 458763
+                        &hrm_right 458982 458765
+                        &hrm_right 458983 458766
+                        &hrm_right 458980 458767
+                        &hrm_right 458981 458803
+                        &kp 458781
+                        &kp 458779
+                        &kp 458758
+                        &lt 2 458777
+                        &kp 458757
+                        &kp 458769
+                        &lt 2 458768
+                        &kp 458806
+                        &kp 458807
+                        &kp 458808
+                        &lt 3 458793
+                        &lt 1 458795
+                        &lt 4 458796
+                        &lt 4 458794
+                        &lt 1 458792
+                        &lt 3 458828
+                    >;
                 };
-
                 nav_layer {
-// -----------------------------------------------------------------------------------------
-// |       |       | MUP  | SCRUP  |      |   | PGUP | HOME | UP   | END   | |
-// | RCLK  | MLEFT | MDWN | MRIGHT | LCLK |   | PGDN | LEFT | DOWN | RIGHT | |
-// | BTCLR |       |      | SCRDWN |      |   | LCLK |      |      |       | |
-// All thumb keys are disabled on Nav, matching the JSON seed.
-                        display-name = "Nav";
-                        bindings = <
-   &none       &none            &mouse_move_up   &mouse_scroll_up  &none        &kp PG_UP &kp HOME &kp UP   &kp END   &none
-   &mkp RCLK   &mouse_move_left &mouse_move_down &mouse_move_right &mkp LCLK    &kp PG_DN &kp LEFT &kp DOWN &kp RIGHT &none
-   &bt BT_CLR  &trans           &trans           &mouse_scroll_down &trans     &mkp LCLK &none    &none    &none     &none
-                                &none           &none              &none      &none     &none    &none
-                        >;
+                    display-name = "Nav";
+                    bindings = <
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &kp 458827
+                        &kp 458826
+                        &kp 458834
+                        &kp 458829
+                        &none
+                        &kp 458977
+                        &kp 458976
+                        &kp 458979
+                        &kp 458978
+                        &none
+                        &kp 458830
+                        &kp 458832
+                        &kp 458833
+                        &kp 458831
+                        &kp 458795
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                    >;
                 };
-
                 number_layer {
-// -----------------------------------------------------------------------------------------
-// | 1  |  2  |  3  |  4  |  5  |     |  6  |  7  |  8  |  9   |  0   |
-// | `  |  =  |     |     |     |     |     |  [  |  ]  |  \   |  '   |
-// |    |     |     |     |     |     |     |     |     |      |      |
-//            |     |     |     |     |     |     |     |
-                        display-name = "Number";
-                        bindings = <
-
-   &kp N1    &kp N2    &kp N3    &kp N4    &kp N5        &kp N6    &kp N7    &kp N8    &kp N9   &kp N0
-   &kp GRAVE &kp EQUAL &none     &none     &none         &none     &kp LBKT  &kp RBKT  &kp BSLH &kp SQT
-   &none     &none     &none     &none     &none        &none     &none     &none     &none    &none
-                       &none     &none     &none        &none     &none     &none
-                        >;
+                    display-name = "Number";
+                    bindings = <
+                        &kp 458782
+                        &kp 458783
+                        &kp 458784
+                        &kp 458785
+                        &kp 458786
+                        &kp 458787
+                        &kp 458788
+                        &kp 458789
+                        &kp 458790
+                        &kp 458791
+                        &kp 458805
+                        &kp 458797
+                        &kp 458798
+                        &none
+                        &none
+                        &none
+                        &kp 458799
+                        &kp 458800
+                        &kp 458801
+                        &kp 458804
+                        &to 0
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                    >;
                 };
-
                 function_layer {
-                        display-name = "Func";
-                        bindings = <
-   &kp F1       &kp F2       &kp F3      &kp F4      &kp F5       &kp F6 &kp F7   &kp F8     &kp F9     &kp F10
-   &kp C_BRI_DN &kp C_BRI_UP &none       &none       &kp C_AL_CALC &none  &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP &kp F11
-   &bt BT_PRV   &bt BT_NXT   &out OUT_USB &out OUT_BLE &none        &none  &none     &none        &none       &kp F12
-                            &none       &none        &none        &none  &none     &none
-                        >;
+                    display-name = "Func";
+                    bindings = <
+                        &kp 458810
+                        &kp 458811
+                        &kp 458812
+                        &kp 458813
+                        &kp 458814
+                        &kp 458815
+                        &kp 458816
+                        &kp 458817
+                        &kp 458818
+                        &kp 458819
+                        &kp 786544
+                        &kp 786543
+                        &none
+                        &none
+                        &kp 786834
+                        &none
+                        &kp 786658
+                        &kp 786666
+                        &kp 786665
+                        &kp 458820
+                        &bt 2 0
+                        &bt 1 0
+                        &out 1
+                        &out 2
+                        &none
+                        &bt 3 0
+                        &bt 3 1
+                        &bt 3 2
+                        &bt 3 4
+                        &kp 458821
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                    >;
                 };
-
+                mouse_layer {
+                    display-name = "Mouse";
+                    bindings = <
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &mkp 8
+                        &mouse_scroll_up
+                        &mouse_move_up
+                        &none
+                        &mkp 16
+                        &kp 458977
+                        &kp 458976
+                        &kp 458979
+                        &kp 458978
+                        &mkp 1
+                        &mkp 1
+                        &mouse_move_left
+                        &mouse_move_down
+                        &mouse_move_right
+                        &mkp 2
+                        &none
+                        &none
+                        &mouse_speed 100
+                        &mouse_speed 200
+                        &mouse_speed 400
+                        &none
+                        &mouse_scroll_down
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &mkp 1
+                        &mkp 2
+                        &mkp 4
+                    >;
+                };
                 shifted_number_layer {
-                        display-name = "Number + Shift";
-                        bindings = <
-   &kp LS(N1)    &kp LS(N2)    &kp LS(N3) &kp LS(N4) &kp LS(N5)     &kp LS(N6) &kp LS(N7)   &kp LS(N8)   &kp LS(N9)   &kp LS(N0)
-   &kp LS(GRAVE) &kp LS(EQUAL) &none      &none      &none          &none      &kp LS(LBKT) &kp LS(RBKT) &kp LS(BSLH) &kp LS(SQT)
-   &none         &none         &none      &none      &none          &none      &none        &none        &none        &none
-                              &none      &none      &none          &none      &none        &none
-                        >;
+                    display-name = "Number + Shift";
+                    bindings = <
+                        &kp 34013214
+                        &kp 34013215
+                        &kp 34013216
+                        &kp 34013217
+                        &kp 34013218
+                        &kp 34013219
+                        &kp 34013220
+                        &kp 34013221
+                        &kp 34013222
+                        &kp 34013223
+                        &kp 34013237
+                        &kp 34013229
+                        &kp 34013230
+                        &none
+                        &none
+                        &none
+                        &kp 34013231
+                        &kp 34013232
+                        &kp 34013233
+                        &kp 34013236
+                        &to 0
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                        &none
+                    >;
                 };
 
                 extra_3 {

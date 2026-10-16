@@ -1,0 +1,8 @@
+/ {
+    factory_compile_probe {
+        compatible = "cormoran,runtime-macro-default";
+        macro-name = "compile-probe";
+        text = "ok";
+        bindings = <&macro_wait_time 10 &macro_press &kp A &macro_release &kp A>;
+    };
+};

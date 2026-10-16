@@ -1,0 +1,171 @@
+{
+  "schema": 1,
+  "seed": "corne-keymap.json",
+  "sha256": "c99ceb2d2cd0fdb6fb6236af3c7f182b8ad9fb0da37fd4ef716b168c4ede8c9f",
+  "behaviorMapping": [
+    {
+      "id": 4,
+      "displayName": "Key Press",
+      "compiledBehavior": "kp"
+    },
+    {
+      "id": 35,
+      "displayName": "Home Row Mods Left",
+      "compiledBehavior": "hrm_left"
+    },
+    {
+      "id": 36,
+      "displayName": "Home Row Mods Right",
+      "compiledBehavior": "hrm_right"
+    },
+    {
+      "id": 9,
+      "displayName": "Layer-Tap",
+      "compiledBehavior": "lt"
+    },
+    {
+      "id": 11,
+      "displayName": "None",
+      "compiledBehavior": "none"
+    },
+    {
+      "id": 17,
+      "displayName": "To Layer",
+      "compiledBehavior": "to"
+    },
+    {
+      "id": 23,
+      "displayName": "Mouse Key Press",
+      "compiledBehavior": "mkp"
+    },
+    {
+      "id": 31,
+      "displayName": "Mouse Scroll Up",
+      "compiledBehavior": "mouse_scroll_up"
+    },
+    {
+      "id": 27,
+      "displayName": "Mouse Move Up",
+      "compiledBehavior": "mouse_move_up"
+    },
+    {
+      "id": 32,
+      "displayName": "Mouse Move Left",
+      "compiledBehavior": "mouse_move_left"
+    },
+    {
+      "id": 26,
+      "displayName": "Mouse Move Down",
+      "compiledBehavior": "mouse_move_down"
+    },
+    {
+      "id": 33,
+      "displayName": "Mouse Move Right",
+      "compiledBehavior": "mouse_move_right"
+    },
+    {
+      "id": 37,
+      "displayName": "Mouse Speed (%)",
+      "compiledBehavior": "mouse_speed"
+    },
+    {
+      "id": 28,
+      "displayName": "Mouse Scroll Down",
+      "compiledBehavior": "mouse_scroll_down"
+    },
+    {
+      "id": 20,
+      "displayName": "Bluetooth",
+      "compiledBehavior": "bt"
+    },
+    {
+      "id": 12,
+      "displayName": "Output Selection",
+      "compiledBehavior": "out"
+    }
+  ],
+  "layerMapping": [
+    {
+      "originId": 0,
+      "compiledId": 0,
+      "name": "Base"
+    },
+    {
+      "originId": 1,
+      "compiledId": 1,
+      "name": "Nav"
+    },
+    {
+      "originId": 2,
+      "compiledId": 2,
+      "name": "Number"
+    },
+    {
+      "originId": 3,
+      "compiledId": 3,
+      "name": "Func"
+    },
+    {
+      "originId": 4,
+      "compiledId": 4,
+      "name": "Mouse"
+    }
+  ],
+  "physicalPositionMapping": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35
+  ],
+  "removedPaddingPositions": [
+    36,
+    37,
+    38,
+    39,
+    40,
+    41
+  ],
+  "unsupportedNativeMacros": [
+    "mouse_move_left",
+    "mouse_move_right",
+    "mouse_move_up",
+    "mouse_move_down",
+    "mouse_scroll_left",
+    "mouse_scroll_right",
+    "mouse_scroll_up",
+    "mouse_scroll_down"
+  ],
+  "reason": "pause-for-release is not representable in runtime macro format v1"
+}

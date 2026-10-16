@@ -18,7 +18,7 @@ class MouseSpeedTests(unittest.TestCase):
         )
         if compiler is None:
             self.skipTest("A host C compiler is required for the mouse speed math tests")
-        with tempfile.TemporaryDirectory() as directory:
+        with tempfile.TemporaryDirectory(dir=ROOT) as directory:
             executable = Path(directory) / ("mouse-speed-test.exe" if os.name == "nt"
                                             else "mouse-speed-test")
             source = ROOT / "tests" / "mouse_speed_math_test.c"
@@ -43,7 +43,10 @@ class MouseSpeedTests(unittest.TestCase):
         self.assertNotIn("&msc_input_listener", nodes)
         keymap = (ROOT / "config" / "corne.keymap").read_text()
         self.assertIn("#include <behaviors/mouse_speed.dtsi>", keymap)
-        self.assertNotRegex(keymap, r"&mouse_speed\s+\d")
+        self.assertEqual(
+            [int(value) for value in __import__("re").findall(r"&mouse_speed\s+(\d+)", keymap)],
+            [100, 200, 400],
+        )
         driver = (ROOT / "mouse" / "mouse_speed.c").read_text()
         self.assertIn("BEHAVIOR_LOCALITY_CENTRAL", driver)
         self.assertIn("ATOMIC_INIT(100)", driver)

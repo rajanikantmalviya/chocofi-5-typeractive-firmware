@@ -7,6 +7,35 @@ config ZMK_KEYBOARD_VIEWER
       on a separate USB CDC interface. No data is sent without host requests.
       This never changes bindings or consumes keyboard events.
 
+config ZMK_KEYBOARD_VIEWER_BLE
+    bool "Read-only encrypted Bluetooth keyboard viewer"
+    depends on ZMK_KEYBOARD_VIEWER && ZMK_BLE
+    default y
+
+config ZMK_RUNTIME_FACTORY
+    bool "Bounded runtime factory migration and safety"
+    depends on !ZMK_SPLIT || ZMK_SPLIT_ROLE_CENTRAL
+    default y
+    select ZMK_RUNTIME_COMBO
+    select ZMK_RUNTIME_MACRO
+    select ZMK_RUNTIME_COMBO_STUDIO_RPC if ZMK_STUDIO
+    select ZMK_RUNTIME_MACRO_STUDIO_RPC if ZMK_STUDIO
+
+if ZMK_RUNTIME_FACTORY
+configdefault ZMK_RUNTIME_COMBO_MAX_COMBOS
+    default 16
+configdefault ZMK_RUNTIME_COMBO_MAX_POSITIONS_PER_COMBO
+    default 4
+configdefault ZMK_RUNTIME_MACRO_COUNT
+    default 8
+configdefault ZMK_RUNTIME_MACRO_POOL_BYTES
+    default 1536
+configdefault ZMK_CUSTOM_SETTINGS_LARGE_VALUE_MAX_SIZE
+    default 256
+configdefault ZMK_BEHAVIORS_QUEUE_SIZE
+    default 160
+endif
+
 config ZMK_MOUSE_SPEED
     bool "Studio-adjustable mouse speed"
     default y
